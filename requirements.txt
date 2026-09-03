@@ -1,0 +1,6 @@
+requests==2.31.0
+python-dotenv==1.0.0
+redis==5.0.1
+pymongo==4.6.1
+cassandra-driver==3.29.1
+neo4j==5.15.0

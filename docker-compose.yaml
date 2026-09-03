@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  mongoDB:
+    image: mongo:7
+    container_name: mongoDB
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=senha123
+    volumes:
+      - mongo_data:/data/db
+
+  cassandra:
+    image: cassandra:4.1
+    container_name: cassandra
+    restart: always
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_CLUSTER_NAME=datalake_cluster
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+
+  neo4j:
+    image: neo4j:5-community
+    container_name: neo4j
+    restart: always
+    ports:
+      - "7474:7474"   # Browser UI — acesse http://localhost:7474
+      - "7687:7687"   # Bolt (driver Python)
+    environment:
+      - NEO4J_AUTH=neo4j/senha123
+    volumes:
+      - neo4j_data:/data
+
+volumes:
+  redis_data:
+  mongo_data:
+  cassandra_data:
+  neo4j_data:
